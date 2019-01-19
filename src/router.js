@@ -1,8 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/Home.vue'
+import Home from './views/containers/Home.vue'
+import ElementUI from 'element-ui'
+import Blocks from './views/containers/Blocks.vue'
+import Transactions from './views/containers/Transactions.vue'
 
 Vue.use(Router)
+Vue.use(ElementUI)
 
 export default new Router({
   mode: 'history',
@@ -14,12 +18,14 @@ export default new Router({
       component: Home
     },
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/blocks',
+      name: 'blocks',
+      component: Blocks
+    },
+    {
+      path: '/transactions',
+      name: 'transactions',
+      component: Transactions
     }
   ]
 })

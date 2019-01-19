@@ -1,0 +1,282 @@
+.f-cb {
+    &:after {
+      clear: both;
+      visibility: hidden;
+      height: 0;
+      overflow: hidden;
+      content: ".";
+      display: block;
+    }
+    zoom: 1;
+  }
+  .f-cbli {
+    li {
+      &:after {
+        display: block;
+        clear: both;
+        visibility: hidden;
+        height: 0;
+        overflow: hidden;
+        content: ".";
+      }
+      zoom: 1;
+    }
+  }
+  .f-ib {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+  }
+  .f-dn {
+    display: none;
+  }
+  .f-db {
+    display: block;
+  }
+  .f-fl {
+    float: left;
+  }
+  .f-fr {
+    float: right;
+  }
+  .f-pr {
+    position: relative;
+  }
+  .f-prz {
+    position: relative;
+    zoom: 1;
+  }
+  .f-oh {
+    overflow: hidden;
+  }
+  .f-fs1 {
+    font-size: 12px;
+  }
+  .f-fs2 {
+    font-size: 14px;
+  }
+  .f-vm {
+    vertical-align: middle;
+  }
+  .f-hm{
+    margin: 0 auto;
+  }
+  .f-fwn {
+    font-weight: normal;
+  }
+  .f-fwb {
+    font-weight: bold;
+  }
+  .f-tal {
+    text-align: left;
+  }
+  .f-tac {
+    text-align: center;
+  }
+  .f-tar {
+    text-align: right;
+  }
+  .f-taj {
+    text-align: justify;
+    text-justify: inter-ideograph;
+  }
+  .f-vam {
+    vertical-align: middle;
+  }
+  .f-vama {
+    * {
+      vertical-align: middle;
+    }
+  }
+  .f-wsn {
+    word-wrap: normal;
+    white-space: nowrap;
+  }
+  .f-pre {
+    overflow: hidden;
+    text-align: left;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+  .f-wwb {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-all;
+  }
+  .f-ti {
+    overflow: hidden;
+    text-indent: -30000px;
+  }
+  .f-ti2 {
+    text-indent: 2em;
+  }
+  .f-lhn {
+    line-height: normal;
+  }
+  .f-tdu {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+  .f-tdn {
+    text-decoration: none;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+  .f-toe {
+    overflow: hidden;
+    word-wrap: normal;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+  .f-csp {
+    cursor: pointer;
+  }
+  .f-csd {
+    cursor: default;
+  }
+  .f-csh {
+    cursor: help;
+  }
+  .f-csm {
+    cursor: move;
+  }
+  .f-sn {
+    font-style: normal;
+  }
+  .f-usn {
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    -o-user-select: none;
+    user-select: none;
+  }
+  .f-mb4 {
+    margin-bottom: 4px;
+  }
+  .f-mb8 {
+    margin-bottom: 8px;
+  }
+  .f-mb16 {
+    margin-bottom: 16px;
+  }
+  .f-mb24 {
+    margin-bottom: 24px;
+  }
+  .f-mb48 {
+    margin-bottom: 48px;
+  }
+  .f-mb64 {
+    margin-bottom: 64px;
+  }
+  .f-mt8 {
+    margin-top: 8px;
+  }
+  .f-mt16 {
+    margin-top: 16px;
+  }
+  .f-mt24 {
+    margin-top: 24px;
+  }
+  .f-mt32 {
+    margin-top: 32px;
+  }
+  .f-mt48 {
+    margin-top: 48px;
+  }
+  .f-ml8 {
+    margin-left: 8px;
+  }
+  .f-ml16 {
+    margin-left: 16px;
+  }
+  .f-mr4 {
+    margin-right: 4px;
+  }
+  .f-mr8 {
+    margin-right: 8px;
+  }
+  .f-mr16 {
+    margin-right: 16px;
+  }
+  .f-p16 {
+    padding: 16px;
+  }
+  .f-pt16 {
+    padding-top: 16px;
+  }
+  .f-p24 {
+    padding: 24px;
+  }
+  .f-pd0 {
+    padding: 0
+  }
+  .f-pd8 {
+    padding: 8px
+  }
+  .f-pd16 {
+    padding: 16px;
+  }
+  .f-pb16 {
+    padding-bottom: 16px;
+  }
+  .f-pr48 {
+    padding-right: 48px;
+  }
+  .f-w100 {
+    width: 100px;
+  }
+  .f-w200 {
+    width: 200px;
+  }
+  .f-w250 {
+    width: 250px;
+  }
+  .f-w300 {
+    width: 300px;
+  }
+  .f-w400 {
+    width: 400px;
+  }
+  .f-w500 {
+    width: 500px;
+  }
+  .f-w600 {
+    width: 600px;
+  }
+  .f-w700 {
+    width: 700px;
+  }
+  .f-w720 {
+    width: 720px;
+  }
+  .f-w800 {
+    width: 800px;
+  }
+  .f-h300 {
+    height: 300px;
+  }
+  .f-h400 {
+    height: 400px;
+  }
+  .f-h500 {
+    height: 500px;
+  }
+  
+  .f-vbh {
+    visibility: hidden;
+  }
+  .clearfix {
+    &:after {
+      visibility: hidden;
+      display: block;
+      font-size: 0;
+      content: " ";
+      clear: both;
+      height: 0;
+    }
+  }
+  
