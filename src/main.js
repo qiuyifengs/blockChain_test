@@ -3,8 +3,9 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
-import './assets/styles/index.scss'
-import './assets/styles/function.scss'
+import '@assets/styles/index.scss'
+import '@assets/styles/function.scss'
+import * as filters from './utils/filters.js'
 
 import 'normalize.css/normalize.css' // 优美的css
 
@@ -13,15 +14,18 @@ import 'nprogress/nprogress.css'// Progress 进度条 样式
 
 import ElementUI from 'element-ui'
 import 'element-ui/lib/theme-chalk/index.css'
-import $ from 'jquery'
-window.$ = $
 
 Vue.config.productionTip = false
 Vue.use(ElementUI)
 
-console.log(process.env.VUE_APP_URL)
+// console.log(process.env.VUE_APP_URL)
 
 NProgress.configure({ showSpinner: false })// NProgress Configuration
+
+// 注册全局filters
+Object.keys(filters).forEach(key => {
+  Vue.filter(key, filters[key])
+})
 
 router.beforeEach((to, from, next) => {
   NProgress.start()
@@ -58,4 +62,4 @@ new Vue({
 //                            `=---='
 //
 //         .............................................
-//                  佛祖保佑             永无BUG
+//                  佛祖保佑              永无BUG

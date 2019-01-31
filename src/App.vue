@@ -2,7 +2,7 @@
   <div id="app">
     <el-container class="layout">
       <section></section>
-      <el-header class="layout-header" :style="{ 'background': isHaderTabBg === false ? 'none' : 'linear-gradient(90deg, rgb(0, 4, 40) 0%, rgb(0, 52, 109) 100%)'}">
+      <el-header class="layout-header" :style="{ 'background': isHaderTabBg === false ? '#020202' : '#020202'}">
       <div class="components-top-nav-header-index-head">
         <div class="components-top-nav-header-index-main components-top-nav-header-index-wide">
             <div class="components-top-nav-header-index-left">
@@ -14,7 +14,10 @@
               <rk-header></rk-header>
             </div>
             <div class="components-top-header-index-right">
-              
+              <div class="searchIputWrap">
+                <input class="searchIput" type="text" placeholder="您可搜索的内容例如：地址/交易哈希/区块/代币名称"><span class="focus-border"></span>
+                <i class="el-icon-search" style="position: relative; color: #fff; cursor: pointer"></i>
+              </div>
             </div>
         </div>
       </div>
@@ -23,6 +26,7 @@
         <router-view />
       </el-main>
       <el-footer>
+        <p class="footBar">Terms & Conditions ㅣ Privacy Policy© 2018 TTC Foundation PTE. All rights reserved.</p>
       </el-footer>
     </el-container>
   </div>
@@ -50,6 +54,26 @@ export default {
 </script>
 
 <style lang="scss">
+.footBar { text-align: center;  color: rgba(0,0,0,.45) }
+.searchIputWrap { width: 350px; position: relative }
+.searchIput{ border: 0; background: none; outline: none; color: #fff; font-size: 13px; border-bottom: 1px solid #cccccc85; padding: 8px 0; width: 94%; margin-right: 2px; letter-spacing: 1px}
+.searchIput ~ .focus-border{position: absolute; bottom: 0; left: 0; width: 100%; height: 1px; z-index: 99; top: 48px}
+.searchIput ~ .focus-border:before, 
+.searchIput ~ .focus-border:after {content: ""; position: absolute; bottom: 0; left: 0; width: 0; height: 100%; background-color: #3399FF; transition: 0.4s;}
+.searchIput ~ .focus-border:after {left: auto; right: 0;}
+.searchIput:focus ~ .focus-border:before, 
+.searchIput:focus ~ .focus-border:after { width: 50%; transition: 0.4s; }
+
+.searchIput::-webkit-input-placeholder {
+  color: #fff
+} 
+.searchIput::-moz-placeholder {
+  color: #fff    
+}
+.searchIput:-ms-input-placeholder {
+  color: #fff       
+}
+
 .layout {
     position: absolute;
     width: 100%;
@@ -90,8 +114,8 @@ export default {
                   overflow: hidden;
                   img {
                     display: inline-block;
-                    vertical-align: middle;
-                    height: 32px;
+                    vertical-align: text-top;
+                    height: 18px;
                   }
                   h1 {
                     color: #fff;

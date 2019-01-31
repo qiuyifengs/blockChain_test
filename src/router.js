@@ -4,6 +4,7 @@ import Home from './views/containers/Home.vue'
 import ElementUI from 'element-ui'
 import Blocks from './views/containers/Blocks.vue'
 import Transactions from './views/containers/Transactions.vue'
+import Representatives from './views/containers/representatives.vue'
 
 Vue.use(Router)
 Vue.use(ElementUI)
@@ -26,6 +27,11 @@ export default new Router({
       path: '/transactions',
       name: 'transactions',
       component: Transactions
+    },
+    {
+      path: '/representatives',
+      name: 'representatives',
+      component: Representatives
     }
   ]
 })

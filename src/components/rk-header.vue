@@ -4,6 +4,7 @@
       <router-link class="rk-nav-link" to="/">首页</router-link>
       <router-link class="rk-nav-link" to="/blocks">区块</router-link>
       <router-link class="rk-nav-link" to="/transactions">交易</router-link>
+      <router-link class="rk-nav-link" to="/representatives">超级节点</router-link>
     </nav>
   </div>
 </template>
@@ -20,7 +21,7 @@ export default {
 <style lang="scss" scoped>
   .rk-nav-link {
     text-decoration: none;
-    margin-right: 20px;
+    margin: 0 18px;
     padding: 5px 10px;
     border-radius: 6px;
     color: #e8e8e8;

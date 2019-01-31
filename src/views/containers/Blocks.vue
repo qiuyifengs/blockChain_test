@@ -16,37 +16,37 @@
                       layout="prev, next" 
                       :total="total">
         </el-pagination>
-        <h2 style="margin-bottom: 0; margin-top: 48px">信息概述</h2>
+        <h2 style="margin-bottom: 0; margin-top: 28px">信息概述</h2>
        </div>
        <el-row type="flex">
             <el-col :span="12">
-                <el-form label-positio="left" label-width="100" :model="formInline" class="demo-form-inline">
-            <el-form-item label="哈希值:">
-                <span>8safasdfjhg23jhjjbsdjfgjhgsjf348safasdfjhg23jhjjbsdjfgjhgsjf3444</span>
-            </el-form-item>
-            <el-form-item label="交易金额:">
-                <span>5.13464 BTC</span>
-            </el-form-item>
-            <el-form-item label="超级节点:">
-                <span style="color: blue">5.13464 BTC</span>
-            </el-form-item>
-            <el-form-item label="发行时间:">
-                <span>2019-01-19 09:39:34</span>
-            </el-form-item>
-            </el-form>
+                <el-form label-positio="left" label-width="100" :model="formInline" class="blockForm">
+                    <el-form-item label="哈希值:">
+                        <span>8safasdfjhg23jhjjbsdjfgjhgsjf348safasdfjhg23jhjjbsdjfgjhgsjf3444</span>
+                    </el-form-item>
+                    <el-form-item label="交易金额:">
+                        <span>5.13464 BTC</span>
+                    </el-form-item>
+                    <el-form-item label="超级节点:">
+                        <span style="color: blue">5.13464 BTC</span>
+                    </el-form-item>
+                    <el-form-item label="发行时间:">
+                        <span>2019-01-19 09:39:34</span>
+                    </el-form-item>
+                    </el-form>
             </el-col>
             <el-col :span="8">
-                <el-form label-positio="left" label-width="100" :model="formInline" class="demo-form-inline">
-            <el-form-item label="交易数量:">
-                <span>3</span>
-            </el-form-item>
-            <el-form-item label="佣金:">
-                <span>5.13464 BTC</span>
-            </el-form-item>
-            <el-form-item label="块大小（字节）:">
-                <span>1.12.123</span>
-            </el-form-item>
-            </el-form>
+                <el-form label-positio="left" label-width="100" :model="formInline" class="blockForm">
+                    <el-form-item label="交易数量:">
+                        <span>3</span>
+                    </el-form-item>
+                    <el-form-item label="佣金:">
+                        <span>5.13464 BTC</span>
+                    </el-form-item>
+                    <el-form-item label="块大小（字节）:">
+                        <span>1.12.123</span>
+                    </el-form-item>
+                </el-form>
             </el-col>
         </el-row>
        
@@ -135,7 +135,10 @@ export default {
 </script>
 
 <style lang="scss">
-.el-form-item__label {
+.blockForm .el-form-item{
+    margin-bottom: 5px
+}
+.blockForm .el-form-item__label {
   color: #6e707396 !important
 }
 .transactionsPage .el-pagination.is-background .btn-prev {

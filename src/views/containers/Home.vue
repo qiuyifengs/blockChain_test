@@ -2,13 +2,13 @@
 <div>
   <section class="headerImage" :style="{ background: 'url('+ imageUrl +')' }">
     <div class="headerImage-inner">
-      <h1 style="color: #fff">欢迎使用幽灵区块链浏览器</h1>
+      <h1 style="color: #fff; font-weight: 300">欢迎使用幽灵区块链浏览器</h1>
      <div class="homePageInput" style="margin-top: 15px; width: 600px">
       <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input4">
         <template slot="append">GO</template>
       </el-input>
     </div>
-    <p style="color:#fff; font-size: 12px">你可搜索的内容例如：地址/交易哈希/区块/代币名称</p>
+    <p class="searchTip">你可搜索的内容例如：地址/交易哈希/区块/代币名称</p>
     </div>
   </section>
   <section class="homePageRadio" style="max-width: 1200px; margin: 16px auto; text-align: center">
@@ -80,7 +80,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 300px;
+    height: 350px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0);
     background-image: linear-gradient(90deg, rgb(0, 4, 40) 0%, rgb(0, 52, 109) 100%);;
@@ -97,14 +97,26 @@ export default {
     }
   }
 
-  .homePageInput .el-input__prefix{
+.searchTip {
+  color: #fff;
+  font-size: 12px;
+  letter-spacing: 1px;
+}
+
+.homePageInput .el-input__prefix{
   color: #000 !important
 }
 .homePageInput .el-input-group__append {
-  border: none !important;
+  background: none;
   background-image: linear-gradient(90deg, #22e4c1 0%, #22b1fe 100%);
   color: #fff;
   cursor: pointer;
+  border: none !important;
+}
+.homePageInput .el-input__inner {
+  border: none !important;
+  height: 39px;
+  line-height: 39px
 }
 
 .homePageRadio .el-radio-group {
