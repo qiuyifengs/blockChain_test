@@ -2,3 +2,12 @@
   background: #f5f7fa
 }
 
+.el-card {
+  box-shadow: 0px 7px 50px 0px rgba(127,172,226,0.231);
+  border: 1px solid #eff3ff !important;
+}
+
+.el-table th>.cell {
+  font-weight: 500;
+  color: #2c2c2c;
+}

@@ -1,12 +1,10 @@
-<template>
-  <div>
-    <nav>
-      <router-link class="rk-nav-link" to="/">首页</router-link>
-      <router-link class="rk-nav-link" to="/blocks">区块</router-link>
-      <router-link class="rk-nav-link" to="/transactions">交易</router-link>
-      <router-link class="rk-nav-link" to="/representatives">超级节点</router-link>
-    </nav>
-  </div>
+<template lang="pug">
+  div
+    nav
+      router-link.rk-nav-link(to="/") {{ $t('message.home') }}
+      router-link.rk-nav-link(to="/blocks") {{ $t('message.blocks') }}
+      router-link.rk-nav-link(to="/transactions") {{ $t('message.transaction') }}
+      router-link.rk-nav-link(to="/representatives") {{ $t('message.superNode') }}
 </template>
 
 <script>

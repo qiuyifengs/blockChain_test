@@ -1,74 +1,41 @@
-<template>
-<div>
-  <section class="headerImage" :style="{ background: 'url('+ imageUrl +')' }">
-    <div class="headerImage-inner">
-      <h1 style="color: #fff; font-weight: 300">欢迎使用幽灵区块链浏览器</h1>
-     <div class="homePageInput" style="margin-top: 15px; width: 600px">
-      <el-input placeholder="请输入内容" prefix-icon="el-icon-search" v-model="input4">
-        <template slot="append">GO</template>
-      </el-input>
-    </div>
-    <p class="searchTip">你可搜索的内容例如：地址/交易哈希/区块/代币名称</p>
-    </div>
-  </section>
-  <section class="homePageRadio" style="max-width: 1200px; margin: 16px auto; text-align: center">
-    <el-radio-group v-model="radio3" class="f-mb16">
-      <el-radio-button label="最新区块"></el-radio-button>
-      <el-radio-button label="最新交易"></el-radio-button>
-    </el-radio-group>
-    <el-card class="f-mb24" shadow="never">
-      <el-table :data="tableData" :header-cell-class-name="header" fit ref="Table" style="width: 100%">
-          <el-table-column
-            fixed
-            prop="date"
-            label="高度"
-            width="180">
-          </el-table-column>
-          <el-table-column prop="address" label="时间" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="交易数量" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="交易金额（BTC）" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="超级节点" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="大小（KB）" show-overflow-tooltip></el-table-column>
-      </el-table>
-      <el-button style="margin-top: 8px" size="medium" round>查看更多</el-button>
-    </el-card>
-  </section>
-</div>
+<template lang="pug">
+div
+  section.headerImage(:style="{ background: 'url('+ imageUrl +')' }")
+    div.headerImage-inner
+      h1(style="color: #fff; font-weight: 300") {{ $t('message.homeTip') }}
+      div.homePageInput(style="margin-top: 15px; width: 600px")
+        el-input(placeholder="请输入内容" prefix-icon="el-icon-search" v-model="searchText")
+          template(slot="append") {{ $t('message.go') }}
+      p.searchTip {{ $t('message.searchPlaceholder') }}
+  section.homePageRadio(style="max-width: 1200px; margin: 16px auto; text-align: center")
+    el-radio-group.f-mb16(v-model="currentLevel")
+      el-radio-button(label="block") {{ $t('message.LatestBlock') }}
+      el-radio-button(label="deal") {{ $t('message.LatestDeal') }}
+    component(v-bind:is="getTableComponent(currentLevel)")
 </template>
 
 <script>
+import blockChainApi from '@/api/blockChain'
+import LatestBlockTable from './components/LatestBlock'
+import LatestDealTable from './components/LatestDeal'
 export default {
-  name: 'home',
+  name: 'blockChainHome',
   components: {
-
+    LatestBlockTable,
+    LatestDealTable
   },
   data () {
     return {
       imageUrl: require('@/assets/headerBg.png'),
-      input4: '',
-      radio3: '最新区块',
-      tableData: [{
-        date: '2016-05-02',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1518 弄'
-      }, {
-        date: '2016-05-04',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1517 弄'
-      }, {
-        date: '2016-05-01',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1519 弄'
-      }, {
-        date: '2016-05-03',
-        name: '王小虎',
-        address: '上海市普陀区金沙江路 1516 弄'
-      }]
+      currentLevel: 'block',
+      searchText: ''
     }
   },
+  created() {
+  },
   methods: {
-    header ({ row, column, rowIndex, columnIndex }) {
-      return 'primary-row'
+    getTableComponent(val) {
+      return this.currentLevel === 'block' ? 'LatestBlockTable' : 'LatestDealTable'
     }
   }
 }
@@ -80,7 +47,7 @@ export default {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 350px;
+    height: 330px;
     width: 100%;
     background-color: rgba(0, 0, 0, 0);
     background-image: linear-gradient(90deg, rgb(0, 4, 40) 0%, rgb(0, 52, 109) 100%);;

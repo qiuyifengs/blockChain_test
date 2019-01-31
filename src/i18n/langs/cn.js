@@ -1,0 +1,15 @@
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN' // 引入element语言包
+
+const cn = { message: {
+  searchPlaceholder: '您可搜索的内容例如：地址/交易哈希/区块/代币名称',
+  home: '首页',
+  go: '搜索',
+  homeTip: '欢迎使用幽灵区块链浏览器',
+  BlockChain: '区块链浏览器',
+  blocks: '区块',
+  transaction: '交易',
+  superNode: '超级节点',
+  LatestBlock: '最新区块',
+  LatestDeal: '最新交易'
+}, ...zhLocale }
+export default cn

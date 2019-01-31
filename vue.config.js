@@ -19,11 +19,11 @@ module.exports = {
     contentBase: path.join(__dirname, 'dist'), // 将 dist 目录下的文件，作为可访问的文件
     compress: true, // 开启Gzip压缩
     host: '',
-    port: 8088,
+    port: 3001,
     open: false,
     https: false,
     hotOnly: false,
-    proxy: ''
+    proxy: 'http://192.168.4.188:3001/'
   },
   chainWebpack: config => {
     // 目录别名alias

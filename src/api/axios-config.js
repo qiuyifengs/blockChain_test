@@ -13,10 +13,6 @@ export default {
       }],
       // 是否跨域请求
       withCredentials: true,
-      // 请求头信息
-      headers: {
-        'x-access-token': ''
-      },
       // 设置超时时间
       timeout: 600000,
       // 返回数据类型

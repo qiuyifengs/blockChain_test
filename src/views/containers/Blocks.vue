@@ -1,74 +1,11 @@
-<template>
-  <div>
-    <el-card class="f-mb24" shadow="never" style="max-width: 1200px; margin: 76px auto 16px;">
-       <div slot="header" class="clearfix">
-         <span style="vertical-align: -webkit-baseline-middle">区块 #9999</span>
-         <el-pagination
-                        background
-                     class="f-fr transactionsPage" 
-                      @size-change="sizeChange" 
-                      @current-change="currentChange" 
-                      :current-page.sync="currentPage" 
-                      :page-sizes="[10,20,30,40]" 
-                      :page-size="pageSize"
-                      prev-text="上一页"
-                      next-text="下一页"
-                      layout="prev, next" 
-                      :total="total">
-        </el-pagination>
-        <h2 style="margin-bottom: 0; margin-top: 28px">信息概述</h2>
-       </div>
-       <el-row type="flex">
-            <el-col :span="12">
-                <el-form label-positio="left" label-width="100" :model="formInline" class="blockForm">
-                    <el-form-item label="哈希值:">
-                        <span>8safasdfjhg23jhjjbsdjfgjhgsjf348safasdfjhg23jhjjbsdjfgjhgsjf3444</span>
-                    </el-form-item>
-                    <el-form-item label="交易金额:">
-                        <span>5.13464 BTC</span>
-                    </el-form-item>
-                    <el-form-item label="超级节点:">
-                        <span style="color: blue">5.13464 BTC</span>
-                    </el-form-item>
-                    <el-form-item label="发行时间:">
-                        <span>2019-01-19 09:39:34</span>
-                    </el-form-item>
-                    </el-form>
-            </el-col>
-            <el-col :span="8">
-                <el-form label-positio="left" label-width="100" :model="formInline" class="blockForm">
-                    <el-form-item label="交易数量:">
-                        <span>3</span>
-                    </el-form-item>
-                    <el-form-item label="佣金:">
-                        <span>5.13464 BTC</span>
-                    </el-form-item>
-                    <el-form-item label="块大小（字节）:">
-                        <span>1.12.123</span>
-                    </el-form-item>
-                </el-form>
-            </el-col>
-        </el-row>
-       
-        <h2>交易</h2>
-      <el-table :data="tableData" :header-cell-class-name="header" fit ref="Table" style="width: 100%">
-          <el-table-column
-            fixed
-            prop="date"
-            label="哈希值"
-            width="180">
-          </el-table-column>
-          <el-table-column prop="name" label="区块" width="180"></el-table-column>
-          <el-table-column prop="address" label="时间" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="类型" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="时间" show-overflow-tooltip></el-table-column>
-
-          <el-table-column prop="address" label="发送者" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="接收者" show-overflow-tooltip></el-table-column>
-          <el-table-column prop="address" label="数量" show-overflow-tooltip></el-table-column>
-
-      </el-table>
-      <el-pagination  class="f-fr f-mt16 f-mb16"
+<template lang="pug">
+div
+  el-card.f-mb24(shadow="never" style="max-width: 1200px; margin: 76px auto 16px;" :body-style="{ padding: '5px' }")
+    el-row(type="flex" justify="space-between")
+      el-col(:span="6")
+        h3.f-ml16 区块
+      el-col(:span="18") 
+        el-pagination.f-fr.f-mb16.f-mt16.f-mr16(
                       background 
                       @size-change="sizeChange" 
                       @current-change="currentChange" 
@@ -76,47 +13,52 @@
                       :page-sizes="[10,20,30,40]" 
                       :page-size="pageSize" 
                       layout="total, sizes, prev, pager, next, jumper" 
-                      :total="total">
-        </el-pagination>
-    </el-card>
-  </div>
+                      :total="total")
+    el-table(:data="tableData" :header-cell-class-name="header" fit ref="Table" style="width: 100%" v-loading.body="listLoading")
+        el-table-column(prop="hash" label="哈希值" min-width="180" show-overflow-tooltip)
+            template(slot-scope="scope")
+                a.toBlockHash(href="#") {{ scope.row.hash }}
+        el-table-column(prop="timestamp" label="时间" sortable min-width="180" show-overflow-tooltip)        
+        el-table-column(prop="nonce" label="区块" sortable min-width="180" show-overflow-tooltip)
+        el-table-column(prop="totalDifficulty" label="价值" sortable min-width="180" show-overflow-tooltip)
+        el-table-column(prop="parentHash" label="发送方" min-width="180" show-overflow-tooltip)
+            template(slot-scope="scope")
+                a.toBlockHash(href="#") {{ scope.row.parentHash }}
+        el-table-column(prop="receiptsRoot" label="接收方" min-width="180" show-overflow-tooltip)
+            template(slot-scope="scope")
+                a.toBlockHash(href="#") {{ scope.row.receiptsRoot }}
+        el-table-column(prop="difficulty" label="类型" min-width="180" show-overflow-tooltip)
+        el-table-column(prop="number" label="数量" sortable min-width="180" show-overflow-tooltip)
+
+    el-pagination.f-fr.f-mt16.f-mb16.f-mr16(
+                    background 
+                    @size-change="sizeChange" 
+                    @current-change="currentChange" 
+                    :current-page.sync="currentPage" 
+                    :page-sizes="[10,20,30,40]" 
+                    :page-size="pageSize" 
+                    layout="total, sizes, prev, pager, next, jumper" 
+                    :total="total")
 </template>
 
 <script>
-
+import blockChainApi from '@/api/blockChain'
 export default {
-  name: 'home',
+  name: 'Blocks',
   components: {
   },
   data () {
     return {
-        formInline: {
-            user: '',
-            region: ''
-        },
         tableData: [],
         currentPage: 1,
         pageSize: 10,
         total: 0,
-        listLoading: true,
-        tableData: [{
-            date: '2016-05-02',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1518 弄'
-        }, {
-            date: '2016-05-04',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1517 弄'
-        }, {
-            date: '2016-05-01',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1519 弄'
-        }, {
-            date: '2016-05-03',
-            name: '王小虎',
-            address: '上海市普陀区金沙江路 1516 弄'
-        }]
+        listLoading: false,
+        tableData: []
     }
+  },
+  created() {
+      this.getBlockAll()
   },
   methods: {
     header ({ row, column, rowIndex, columnIndex }) {
@@ -124,12 +66,31 @@ export default {
     },
     sizeChange(size) {
       this.pageSize = size
+      this.getBlockAll()
     },
-
     currentChange(currentPage) {
       this.currentPage = currentPage
+      this.getBlockAll()
     },
-
+    getBlockAll() {
+        return new Promise((resolve, reject) => {
+            this.listLoading = true
+            const param = {
+                page: this.currentPage,
+                limit: this.pageSize
+            }
+            blockChainApi.block.getBlockAll(param, res => {
+            this.listLoading = false
+            if (res.code === 1) {
+                this.tableData = res.data.docs
+                this.total = res.data.total
+                resolve()
+            } else {
+                reject(res.message)
+            }
+        })
+      }) 
+    }
   }
 }
 </script>
@@ -141,12 +102,12 @@ export default {
 .blockForm .el-form-item__label {
   color: #6e707396 !important
 }
-.transactionsPage .el-pagination.is-background .btn-prev {
+/*.transactionsPage .el-pagination.is-background .btn-prev {
     border-right: none !important
 }
 .el-pagination.is-background .btn-next, .el-pagination.is-background .btn-prev, .el-pagination.is-background .el-pager li {
     padding: 0 8px !important;
     border: 1px solid #ccc;
     border-radius: 1px !important
-}
+}*/
 </style>

@@ -15,9 +15,6 @@ axios.interceptors.response.use((response) => {
       cancelButtonText: '取消',
       type: 'warning'
     }).then(() => {
-      /*store.dispatch('FedLogOut').then(() => {
-        location.reload()// 为了重新实例化vue-router对象 避免bug
-      })*/
     })
   } else {
     return response.data
@@ -101,6 +98,13 @@ export default {
       .then(callback)
       .catch((error) => {
         console.info(error)
+      })
+  },
+  getSingle: (url, data, callback) => {
+    axios.get(url + '/' + data.number, config.serviceConfig())
+      .then(callback)
+      .catch((error) => {
+        console.log(error)
       })
   },
   list: (url, data, callback) => {
