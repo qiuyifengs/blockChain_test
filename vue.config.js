@@ -69,61 +69,6 @@ module.exports = {
         symbolId: '[name]'
       })
   },
-  configureWebpack: config => {
-    if (IS_PROD) {
-      const plugins = []
-      // 去除无效css
-      plugins.push(
-        new PurgecssPlugin({
-          paths: glob.sync([
-            path.join(__dirname, './src/index.html'),
-            path.join(__dirname, './**/*.vue'),
-            path.join(__dirname, './src/**/*.js')
-          ])
-        })
-      )
-      // 生产环境去除console
-      plugins.push(
-        new UglifyJsPlugin({
-          uglifyOptions: {
-            compress: {
-              warnings: false, // 在UglifyJs删除没有用到的代码时不输出警告
-              drop_console: true, // 删除所有的 `console` 语句
-              collapse_vars: true, // 内嵌定义了但是只用到一次的变量
-              reduce_vars: true, // 提取出出现多次但是没有定义成变量去引用的静态值
-              drop_debugger: false,
-              pure_funcs: ['console.log'] // 移除console
-            }
-          },
-          sourceMap: false,
-          parallel: true
-        })
-      )
-      // 开启Gzip压缩
-      if (IS_GZIP) {
-        plugins.push(
-          new CompressionWebpackPlugin({
-            filename: '[path].gz[query]',
-            algorithm: 'gzip',
-            test: /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i,
-            threshold: 10240,
-            minRatio: 0.8
-          })
-        )
-      }
-      config.plugins = [...config.plugins, ...plugins]
-    }
-
-    // cdn引用时配置externals
-    if (IS_CDN) {
-      config.externals = {
-        vue: 'Vue',
-        'vue-router': 'VueRouter',
-        vuex: 'Vuex',
-        axios: 'axios'
-      }
-    }
-  },
   css: {
     // 将组件内部的css提取到一个单独的css文件（只用在生产环境）
     // 也可以是传递给 extract-text-webpack-plugin 的选项对象
