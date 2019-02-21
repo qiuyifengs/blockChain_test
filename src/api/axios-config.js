@@ -6,7 +6,7 @@ export default {
   serviceConfig: function() {
     return {
       // 基础url前缀
-      baseURL: process.env.BASE_API,
+      baseURL: '',
       transformResponse: [function(response) {
         // 这里提前处理返回的数据
         return response

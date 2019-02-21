@@ -4,7 +4,16 @@
   .toBlockHash {
     color: cornflowerblue;
     text-decoration: none;
+    cursor: pointer;
     &:hover {
       text-decoration: underline
     }
+  }
+  .text-deal{
+    overflow : hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    word-break: break-all
   }

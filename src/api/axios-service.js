@@ -107,6 +107,14 @@ export default {
         console.log(error)
       })
   },
+  getTxsByAddress: (url, address, data, callback) => {
+    const param = qs.stringify(data)
+    axios.get(url + '/byaddress/' + address.id + '?' + param, config.serviceConfig())
+      .then(callback)
+      .catch((error) => {
+        console.log(error)
+      })
+  },
   list: (url, data, callback) => {
     const param = qs.stringify(data)
     axios.get(url + '?' + param, config.serviceConfig())

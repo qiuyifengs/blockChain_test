@@ -7,13 +7,14 @@ import BlocksDetail from './views/containers/Blocks-detail.vue'
 import Transactions from './views/containers/Transactions.vue'
 import TransactionsDetail from './views/containers/Transactions-detail.vue'
 import Representatives from './views/containers/representatives.vue'
+import TransactionsByAddress from './views/containers/TransactionsByAddress.vue'
+import TransactionByblock from './views/containers/TransactionByblock.vue'
 
 Vue.use(Router)
 Vue.use(ElementUI)
-
 export default new Router({
-  mode: 'history',
-  base: process.env.BASE_URL,
+  mode: 'hash',
+  base: process.env.VUE_APP_BASE_URL,
   routes: [
     {
       path: '/',
@@ -43,9 +44,16 @@ export default new Router({
       component: TransactionsDetail
     },
     {
-      path: '/representatives',
-      name: 'representatives',
-      component: Representatives
+      path: '/TransactionsByAddress/:id',
+      name: 'TransactionsByAddress',
+      props: true,
+      component: TransactionsByAddress
+    },
+    {
+      path: '/TransactionByblock/:id',
+      name: 'TransactionByblock',
+      props: true,
+      component: TransactionByblock
     }
   ]
 })

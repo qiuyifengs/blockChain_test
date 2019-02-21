@@ -11,6 +11,10 @@ import '@assets/styles/element-ui.scss'
 import '@assets/styles/index.scss'
 import '@assets/styles/function.scss'
 
+/* 插件导入 */
+import VueClipboard from 'vue-clipboard2'
+import VueLocalForage from 'vue-localforage'
+
 /* PWA */
 import './registerServiceWorker'
 
@@ -29,7 +33,6 @@ Vue.use(ElementUI, { size: 'normal', locale })
 /* 配置及信息注入 */
 // default
 Vue.config.productionTip = false
-// console.log(process.env.VUE_APP_URL)
 
 NProgress.configure({ showSpinner: false })// NProgress Configuration
 
@@ -37,6 +40,9 @@ NProgress.configure({ showSpinner: false })// NProgress Configuration
 Object.keys(filters).forEach(key => {
   Vue.filter(key, filters[key])
 })
+
+Vue.use(VueClipboard)
+Vue.use(VueLocalForage)
 
 router.beforeEach((to, from, next) => {
   NProgress.start()

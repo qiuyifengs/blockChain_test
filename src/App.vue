@@ -35,15 +35,15 @@
             </div>
             <div class="components-top-header-index-right">
               <div class="searchIputWrap">
-                <input class="searchIput" type="text" v-model="searchText" :placeholder="$t('message.searchPlaceholder')"><span class="focus-border"></span>
-                <i class="el-icon-search" style="position: relative; color: #fff; cursor: pointer"></i>
+                <input class="searchIput" type="text" @keyup.enter="search" v-on:click.native="search" v-model.trim="searchText" :placeholder="$t('message.searchPlaceholder')"><span class="focus-border"></span>
+                <i class="el-icon-search" style="position: relative; color: #fff; cursor: pointer" @click="search"></i>
               </div>
             </div>
         </div>
       </div>
       </el-header>
       <el-main style="padding: 0">
-        <router-view />
+        <router-view :key="activeDate" />
       </el-main>
       <el-footer>
         <p class="footBar">Terms & Conditions ㅣ Privacy Policy© 2018 TTC Foundation PTE. All rights reserved.</p>
@@ -54,6 +54,7 @@
 
 <script>
 import RkHeader from '@/components/rk-header.vue'
+import localforage from 'localforage'
 export default {
   name: 'home',
   components: {
@@ -61,14 +62,39 @@ export default {
   },
   data () {
     return {
+      activeDate: '',
       isHaderTabBg: false,
       searchText: ''
     }
   },
   watch: { 
     $route(to, from) {
-      console.log(this.$route.name)
+      this.activeDate = (new Date()).toString();
       this.isHaderTabBg = this.$route.name === 'home' ? false : true
+    }
+  },
+  created() {
+      this.$storageConfig({
+        driver: [
+          localforage.WEBSQL,
+          localforage.INDEXEDDB,
+          localforage.LOCALSTORAGE
+        ],
+        name: 'BlockChainStorage',
+        version: 1.0,
+        size: 4980736,
+        storeName: 'keyValue'
+      })
+    },
+  methods: {
+    search(){
+      if (/^[0-9]+$/.test(this.searchText)) {
+        const id = Number(this.searchText)
+        this.$router.push({ name: 'blocks-detail', params: { id }})
+      } else {
+        const id = this.searchText
+        this.$router.push({ name: 'TransactionsByAddress', params: { id }})
+      }
     }
   }
 }

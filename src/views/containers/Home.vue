@@ -4,9 +4,10 @@ div
     div.headerImage-inner
       h1(style="color: #fff; font-weight: 300") {{ $t('message.homeTip') }}
       div.homePageInput(style="margin-top: 15px; width: 600px")
-        el-input(placeholder="请输入内容" prefix-icon="el-icon-search" v-model="searchText")
-          template(slot="append") {{ $t('message.go') }}
-      p.searchTip {{ $t('message.searchPlaceholder') }}
+        el-input(:placeholder="$t('message.searchPlaceholder')" @keyup.enter.native="search" @click="search" prefix-icon="el-icon-search" clearable v-model.trim="searchText")
+          template(slot="append")
+            span(@click="search") {{ $t('message.go') }}
+      //- p.searchTip {{ $t('message.searchPlaceholder') }}
   section.homePageRadio(style="max-width: 1200px; margin: 16px auto; text-align: center")
     el-radio-group.f-mb16(v-model="currentLevel")
       el-radio-button(label="block") {{ $t('message.LatestBlock') }}
@@ -36,6 +37,16 @@ export default {
   methods: {
     getTableComponent(val) {
       return this.currentLevel === 'block' ? 'LatestBlockTable' : 'LatestDealTable'
+    },
+
+    search(){
+      if (/^[0-9]+$/.test(this.searchText)) {
+        const id = Number(this.searchText)
+        this.$router.push({ name: 'blocks-detail', params: { id }})
+      } else {
+        const id = this.searchText
+        this.$router.push({ name: 'TransactionsByAddress', params: { id }})
+      }
     }
   }
 }

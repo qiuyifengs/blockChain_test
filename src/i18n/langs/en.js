@@ -1,6 +1,6 @@
 import enLocale from 'element-ui/lib/locale/lang/en'
 const en = { message: {
-  searchPlaceholder: 'Search: What you can search for, for example: address / transaction hash / block / token name',
+  searchPlaceholder: 'Search by Address / Txhash / Block / Token / Ens',
   home: 'Home',
   go: 'Go',
   homeTip: 'Welcome to Ghost Block Chain Browser',
@@ -9,6 +9,13 @@ const en = { message: {
   transaction: 'Transaction',
   superNode: 'SuperNode',
   LatestBlock: 'LatestBlock',
-  LatestDeal: 'LatestDeal'
+  LatestDeal: 'LatestDeal',
+  hash: 'TxHash',
+  block: 'Block',
+  Age: 'Age',
+  txn: 'txn',
+  signer: 'Signer',
+  GasUsed: 'GasUsed',
+  gasLimit: 'GasLimit'
 }, ...enLocale }
 export default en

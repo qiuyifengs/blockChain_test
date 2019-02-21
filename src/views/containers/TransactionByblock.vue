@@ -21,29 +21,35 @@ div
             ref="Table" 
             style="width: 100%" 
             v-loading.body="listLoading")
-      el-table-column(type="index" width="50")
       el-table-column(prop="hash" :label="$t('message.hash')" min-width="150")
-        template(slot-scope="scope")
-            a.toBlockHash.text-deal(href="#" @click='enterTransactionsDetail(scope.row)') {{ scope.row.hash }}
+                template(slot-scope="scope")
+                    a.toBlockHash.text-deal(href="#" @click='enterTransactionsDetail(scope.row)') {{ scope.row.hash }}
       el-table-column(prop="blockNumber" label="Block" min-width="100")
-        template(slot-scope="scope")
-            a.toBlockHash.text-deal(href="#" @click='enterBlockDetail(scope.row)') {{ scope.row.blockNumber }}
+          template(slot-scope="scope")
+              a.toBlockHash.text-deal(href="#" @click='enterBlockDetail(scope.row)') {{ scope.row.blockNumber }}
       el-table-column(prop="gasPrice" label="gasPrice" min-width="80")
         template(slot-scope="scope")
           span {{ scope.row.gasPrice | gasPriceFilter }}
       el-table-column(prop="from" label="From" min-width="120")
-        template(slot-scope="scope")
-           a.toBlockHash.text-deal(@click="entetTxsByAddress(scope.row, 1)") {{ scope.row.from }}
-      el-table-column(width="40")
-        template(slot-scope="scope")
-          el-button(type="success" size="mini" icon="el-icon-arrow-right" circle plain)
+          template(slot-scope="scope")
+              span.text-deal(v-if="scope.row.from === address") {{ scope.row.from }}
+              a.toBlockHash.text-deal(@click="entetTxsByAddress(scope.row, 1)" v-else) {{ scope.row.from }}
+      el-table-column(width="70")
+          template(slot-scope="scope")
+              el-tag(type="warning" size="small" v-if="scope.row.from === address") OUT
+              el-tag(size="small" v-else) IN
       el-table-column(prop="to" label="To" min-width="120")
-        template(slot-scope="scope")
-          el-row(type="flex")
-            a.toBlockHash.text-deal(@click="entetTxsByAddress(scope.row, 2)") {{ scope.row.to }}
+          template(slot-scope="scope")
+              el-row(type="flex")
+                  el-col(:span="2" v-if="scope.row.from === address")
+                      el-tooltip(effect="dark" content="contract" placement="bottom")
+                          i.el-icon-document
+                  el-col(:span="22")
+                      a.toBlockHash.text-deal.f-ml4(v-if="scope.row.from === address" @click="entetTxsByAddress(scope.row, 2)") {{ scope.row.to }}
+                      span.text-deal(v-else) {{ scope.row.to }}
       el-table-column(prop="value" label="Value" min-width="150")
-        template(slot-scope="scope")
-          span {{ scope.row.value | valueFilter }}
+          template(slot-scope="scope")
+              span {{ scope.row.value | valueFilter }}
     el-pagination.f-fr.f-mt16.f-mb16.f-mr16(
                       background 
                       @size-change="sizeChange" 
@@ -56,14 +62,17 @@ div
 </template>
 
 <script>
-import Web3 from 'web3'
 import _ from 'lodash'
+import Web3 from 'web3'
 import blockChainApi from '@/api/blockChain'
 const webjs = new Web3(Web3.utils)
 
 export default {
   name: 'transaction',
   components: {
+  },
+  props: {
+    id: 0
   },
   data () {
     return {
@@ -86,9 +95,9 @@ export default {
   },
   created() {
     const self = this
-    this.$getItem('transactionPageSize', (err, value) => {
+    this.$getItem('transactionByBlockPageSize', (err, value) => {
       if (_.isNull(err) && value) self.pageSize = value
-      this.getTxsAll()
+      this.getTxsByblock()
     })
   },
   methods: {
@@ -102,8 +111,8 @@ export default {
     },
 
     enterBlockDetail(row) {
-        const id = row.blockNumber
-        this.$router.push({ name: 'blocks-detail', params: { id }})
+      const id = row.blockNumber
+      this.$router.push({ name: 'blocks-detail', params: { id }})
     },
 
     enterTransactionsDetail(row) {
@@ -113,22 +122,23 @@ export default {
 
     sizeChange (size) {
       this.pageSize = size
-      this.$setItem('transactionPageSize', size)
-      this.getTxsAll()
+      this.$setItem('transactionByBlockPageSize', size)
+      this.getTxsByblock()
     },
 
     currentChange (currentPage) {
       this.currentPage = currentPage
-      this.getTxsAll()
+      this.getTxsByblock()
     },
 
-    async getTxsAll() {
+    async getTxsByblock() {
       this.listLoading = true
       const param = {
         page: this.currentPage,
-        limit: this.pageSize
+        limit: this.pageSize,
+        block: this.id
       }
-      await blockChainApi.transaction.getTxsAll(param, res => {
+      await blockChainApi.transaction.getTxsByblock(param, res => {
         this.listLoading = false
         if (res.code === 1) {
           this.tableData = res.data.docs

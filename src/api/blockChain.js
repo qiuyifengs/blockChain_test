@@ -37,10 +37,10 @@ const transaction = {
     service.get(API_TRANSACTION_ROUTER + '/byblock', data, callback)
   },
   getTxsByHash: (data, callback) => {
-    service.get(API_TRANSACTION_ROUTER, data, callback)
+    service.getSingle(API_TRANSACTION_ROUTER, data, callback)
   },
-  getTxsByAddress: (data, callback) => {
-    service.get(API_TRANSACTION_ROUTER, data, callback)
+  getTxsByAddress: (address, data, callback) => {
+    service.getTxsByAddress(API_TRANSACTION_ROUTER, address, data, callback)
   }
 }
 

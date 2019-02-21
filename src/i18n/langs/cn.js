@@ -10,6 +10,13 @@ const cn = { message: {
   transaction: '交易',
   superNode: '超级节点',
   LatestBlock: '最新区块',
-  LatestDeal: '最新交易'
+  LatestDeal: '最新交易',
+  hash: '哈希',
+  block: '区块',
+  Age: '块龄',
+  txn: '交易',
+  signer: '矿工',
+  GasUsed: '燃料用量',
+  gasLimit: '燃料限制'
 }, ...zhLocale }
 export default cn

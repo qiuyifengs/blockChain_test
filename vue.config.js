@@ -10,15 +10,17 @@ const IS_GZIP = true; //是否开启Gzip压缩
 const resolve = dir => path.join(__dirname, dir)
 
 module.exports = {
-  publicPath: process.env.NODE_ENV === 'production' ? '' : '/',
+  publicPath: process.env.NODE_ENV === 'production' ? '' : './',
   lintOnSave: false,
   outputDir: 'dist',
+  indexPath: 'index.html',
+  assetsDir: 'assets',
   productionSourceMap: false,
   filenameHashing: true, // 生成的静态资源在它们的文件名中包含了 hash 以便更好的控制缓存
   devServer: {
     contentBase: path.join(__dirname, 'dist'), // 将 dist 目录下的文件，作为可访问的文件
     compress: true, // 开启Gzip压缩
-    host: '',
+    host: '127.0.0.1',
     port: 3001,
     open: false,
     https: false,
