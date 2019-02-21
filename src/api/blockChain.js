@@ -2,8 +2,8 @@
  * Created by qiuyifeng on 19/1/18.
  */
 import service from './axios-service'
-const API_BLOCK_ROUTER = '/block'
-const API_TRANSACTION_ROUTER = '/txs'
+const API_BLOCK_ROUTER = 'http://192.168.4.188:3001/block'
+const API_TRANSACTION_ROUTER = 'http://192.168.4.188:3001/txs'
 
 const block = {
   getBlockCount: (data, callback) => {

@@ -94,6 +94,7 @@ export default {
   },
   get: (url, data, callback) => {
     const param = qs.stringify(data)
+    console.log(config.serviceConfig())
     axios.get(url + '?' + param, config.serviceConfig())
       .then(callback)
       .catch((error) => {
